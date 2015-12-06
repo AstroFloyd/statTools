@@ -1,10 +1,12 @@
-# statTools
-Command-line tools for simple statistics
+# ![statTools logo][logo] statTools
+**Command-line tools for simple statistics**
 
 The package statTools provides command-line tools for simple statistics, written in
 Fortran. The package is currently in the alpha stage; a number of programs sit around
-on my computer, waiting to be gathered, tidied up and added — stay tuned (December
-2015). The default installer uses [CMake](https://cmake.org/). The code has been used
+on my computer, waiting to be gathered, tidied up and added &mdash; stay tuned (December
+2015).
+
+The default installer uses [CMake](https://cmake.org/). The code has been used
 with [gfortran](https://gcc.gnu.org/fortran/) (4.9 or newer),
 [g95](http://www.g95.org) and
 [Intel Fortran](http://software.intel.com/en-us/articles/non-commercial-software-development/)
@@ -26,6 +28,7 @@ From the package root directory (containing CMakeLists.txt), do e.g.:
 3. make
 4. sudo make install
 
+For more installation options, see the [INSTALL](doc/INSTALL) file.
 
 
 ## Similar packages
@@ -68,4 +71,4 @@ send a pull request through [GitHub](https://github.com/AstroFloyd).
   <span itemprop="location">Planet Earth</span>
 </section>
 
-
+[logo]: https://raw.githubusercontent.com/AstroFloyd/statTools/master/src/functions.f90 "statTools logo"
