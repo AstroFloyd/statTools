@@ -78,8 +78,8 @@ endif( NOT EXISTS ${CMAKE_SOURCE_DIR}/src/code_version.f90 OR CREATE_VERSION )
 
 
 # Put common source files in a static library, and link it to the other object files:
-add_library( "St"  STATIC  src/code_version.f90 )  # Creates libSt.a
-target_link_libraries( St  ${LibSUFR_LIBRARIES} )  # link libSUFR to libSt.a
+add_library( "St"  STATIC  src/code_version.f90 src/functions.f90 )  # Creates libSt.a
+target_link_libraries( St  ${LibSUFR_LIBRARIES} )                    # link libSUFR to libSt.a
 
 
 # List of programs to compile:
