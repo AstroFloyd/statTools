@@ -1,31 +1,29 @@
-!> \file  die.f90:  Throw a die
+!> \file die.f90  Throw an n-sided die
 
 !***********************************************************************************************************************************
-!> \brief  Throw a die
+!> \brief  Throw an n-sided die
 
 program die
-  use SUFR_command_line
+  use SUFR_constants, only: set_SUFR_constants
+  use SUFR_command_line, only: get_command_argument_i
+  use SUFR_system, only: syntax_quit
   use SUFR_random_numbers, only: get_ran_seed, ran_unif
   implicit none
-  integer :: nsides, nthrows, seed, it
+  integer :: Narg, Nsides, Nthrows, seed, it
   
-  nthrows = 1
+  call set_SUFR_constants()  ! Define constants for libSUFR
   
-  select case(command_argument_count())
-  case(1)
-     call get_command_argument_i(1,nsides)
-  case(2)
-     call get_command_argument_i(1,nsides)
-     call get_command_argument_i(2,nthrows)
-  case default
-     write(0,'(/,A,/)')'  syntax:  die <# sides> [<# throws>]   Default is to trow the die once'
-     stop
-  end select
+  Narg = command_argument_count()
+  if(Narg.lt.1 .or. Narg.gt.2)  call syntax_quit('<# sides> [<# throws>]', 0, 'Throw an n-sided die.  Default is one throw.')
+  
+  Nthrows = 1
+  call get_command_argument_i(1,Nsides)
+  if(Narg.ge.2) call get_command_argument_i(2,Nthrows)
   
   seed = get_ran_seed(0)  ! 0 - completely random
   write(*,*)
-  do it = 1,nthrows
-     write(6,'(A,I0,A,I0)') ' Throw ',it,': ', ceiling(ran_unif(seed)*nsides)
+  do it = 1,Nthrows
+     write(*,'(A,I0,A,I0)') ' Throw ',it,': ', ceiling(ran_unif(seed)*Nsides)
   end do
   write(*,*)
   
