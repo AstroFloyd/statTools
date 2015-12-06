@@ -2,7 +2,7 @@
 ##  CMakeFile for statTools
 ##  AF, 2015-04-20
 ##
-##  Copyright 2007-2015 AstroFloyd - astrofloyd.org
+##  Copyright 2009-2015 AstroFloyd - astrofloyd.org
 ##  
 ##  This file is part of the statTools package,
 ##  see: http://stattools.sf.net/

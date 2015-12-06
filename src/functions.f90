@@ -1,7 +1,7 @@
 !> \file functions.f90  General procedures for statTools
 
 
-!  Copyright (c) 2002-2015  AstroFloyd - astrofloyd.org
+!  Copyright (c) 2009-2015  AstroFloyd - astrofloyd.org
 !   
 !  This file is part of the statTools package, 
 !  see: http://stattools.sourceforge.net/

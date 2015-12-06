@@ -11,7 +11,7 @@
 ##  2015-03-29, AF: ported to astroTools
 ##  2015-12-05, AF: ported to statTools
 ##  
-##  Copyright (c) 2010-2015 AstroFloyd - astrofloyd.org
+##  Copyright (c) 2009-2015 AstroFloyd - astrofloyd.org
 ##  
 ##  This file is part of the statTools package, 
 ##  see: http://stattools.sf.net/
