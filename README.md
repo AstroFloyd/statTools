@@ -28,7 +28,7 @@ From the package root directory (containing CMakeLists.txt), do e.g.:
 3. make
 4. sudo make install
 
-For more installation options, see the [INSTALL](doc/INSTALL) file.
+For more compilation and installation options, see the [INSTALL](doc/INSTALL) file.
 
 
 ## Similar packages
@@ -71,4 +71,4 @@ send a pull request through [GitHub](https://github.com/AstroFloyd).
   <span itemprop="location">Planet Earth</span>
 </section>
 
-[logo]: https://raw.githubusercontent.com/AstroFloyd/statTools/master/src/functions.f90 "statTools logo"
+[logo]: https://raw.githubusercontent.com/AstroFloyd/statTools/master/doc/sT_sm.png "statTools logo"
