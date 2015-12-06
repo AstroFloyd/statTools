@@ -20,11 +20,11 @@ and can be used under the conditions of version 3 of the
 In order to compile and install statTools, you'll need a
 [Fortran compiler](https://gcc.gnu.org/fortran/), [CMake](https://cmake.org/) and
 [libSUFR](http://libsufr.sourceforge.net) installed.
-installed.
-From the package root directory (containing CMakeLists.txt), do e.g.:
+From the package/git root directory (probably named statTools/ and containing
+CMakeLists.txt), do e.g.:
 
-1. mkdir build && cd build
-2. cmake
+1. mkdir build && cd build/
+2. cmake ..
 3. make
 4. sudo make install
 
@@ -34,7 +34,7 @@ For more compilation and installation options, see the [INSTALL](doc/INSTALL) fi
 ## Similar packages
 If you like statTools, you may be interested in the following FOSS packages as well:
 
-* [libSUFR](http://libsufr.sourceforge.net):         a LIBrary containing Some Useful Routines
+* [libSUFR](http://libsufr.sourceforge.net):         a **lib**rary containing **S**ome **U**seful **F**ortran **R**outines
 * [astrotools](http://astrotools.sourceforge.net):   command-line tools for astronomy and astrophysics
 * [GWtool](http://astrotools.sourceforge.net):       command-line tools for gravitational waves
 
