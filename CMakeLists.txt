@@ -78,8 +78,8 @@ endif( NOT EXISTS ${CMAKE_SOURCE_DIR}/src/code_version.f90 OR CREATE_VERSION )
 
 
 # Put common source files in a static library, and link it to the other object files:
-#add_library( "St"  STATIC  src/functions.f90 src/code_version.f90 )       # Creates libSt.a
-#target_link_libraries( St  ${LibSUFR_LIBRARIES}} )  # link libSUFR to libSt.a
+add_library( "St"  STATIC  src/code_version.f90 )  # Creates libSt.a
+target_link_libraries( St  ${LibSUFR_LIBRARIES} )  # link libSUFR to libSt.a
 
 
 # List of programs to compile:
@@ -91,8 +91,8 @@ set( ST_PROGRAMS
 # For each program, specify the binary name (st_PROGRAM), source name (src/PROGRAM.f90), and compile and link the code:
 foreach( program ${ST_PROGRAMS} )
   add_executable( st_${program} "src/${program}.f90")
-  target_link_libraries( st_${program}  ${LibSUFR_LIBRARIES} )  # St
-  set( ST_BINARIES ${ST_BINARIES} st_${program} )               # For install()
+  target_link_libraries( st_${program}  ${LibSUFR_LIBRARIES} St )
+  set( ST_BINARIES ${ST_BINARIES} st_${program} )                  # For install()
 endforeach( program )
 
 

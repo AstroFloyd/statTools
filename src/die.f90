@@ -4,14 +4,19 @@
 !> \brief  Throw an n-sided die
 
 program die
-  use SUFR_constants, only: set_SUFR_constants
+  use SUFR_constants, only: set_SUFR_constants, stdOut
   use SUFR_command_line, only: get_command_argument_i
   use SUFR_system, only: syntax_quit
   use SUFR_random_numbers, only: get_ran_seed, ran_unif
+  use ST_version, only: print_statTools_version
+  
   implicit none
   integer :: Narg, Nsides, Nthrows, seed, it
   
+  
   call set_SUFR_constants()  ! Define constants for libSUFR
+  
+  call print_statTools_version(stdOut)
   
   Narg = command_argument_count()
   if(Narg.lt.1 .or. Narg.gt.2)  call syntax_quit('<# sides> [<# throws>]', 0, 'Throw an n-sided die.  Default is one throw.')
