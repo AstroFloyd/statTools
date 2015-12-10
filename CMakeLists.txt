@@ -83,8 +83,8 @@ target_link_libraries( St  ${LibSUFR_LIBRARIES} )                    # link libS
 
 
 # List of programs to compile:
-set( ST_PROGRAMS 
-  die lintpol statistics
+set( ST_PROGRAMS
+  die error_propagation lintpol statistics
   )
 
 
