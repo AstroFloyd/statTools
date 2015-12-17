@@ -1,0 +1,43 @@
+.\" Manpage for statTools.
+.\" Contact AstroFloyd at astrofloyd.org to correct errors or typos.
+.TH "statTools" 1 "Thu Dec 17 2015" "statTools"
+.ad l
+.nh
+.SH NAME
+statTools \- command-line tools for simple statistics, written in Fortran
+
+.SH DESCRIPTION
+
+The package statTools provides assorted command-line tools for simple 
+statistics, written in Fortran. The package is currently in the alpha stage; 
+a few more programs sit around on my computer, waiting to be gathered, tidied 
+up and added - stay tuned.  They can be used under the 
+conditions of version 3 of the GPL.  To download the statTools package, read the 
+code documentation, or to contact the developer, see: 
+\fBhttp://stattools.sourceforge.net\fP\&.
+
+.SH SYNOPSIS
+\fBst_<command>\fP \fI[<options>]\fP
+
+.PP
+.SS "Commands"
+.br
+
+.RI "\fBst_binom\fP  Calculate binominal statistics:  \fIP = n! / [k!(n-k)!] * p^k * (1-p)^(n-k)\fP for \fIk\fP succesful trials out of \fIn\fP trials with probability \fIp\fP"
+
+.RI "\fBst_die\fP  Throw an \fIn\fP-sided die (several times)"
+
+.RI "\fBst_error_propagation\fP  Compute the error when adding, subtracting, multiplying or dividing two quantities with symmetric errors"
+
+.RI "\fBst_lintpol\fP  Do linear inter- or extrapolation using two datapoints"
+
+.RI "\fBst_poisson\fP  Calculate Poisson statistics:  \fIP = L^k e^-L / k!\fP"
+
+.RI "\fBst_statistics\fP  Calculate basic statistics (mean, median, variance, standard deviation, etc.) for a number of data points"
+
+
+
+
+.SH "AUTHOR"
+.PP 
+statTools was written by AstroFloyd (\fBhttp://astrofloyd.org\fP)\&
