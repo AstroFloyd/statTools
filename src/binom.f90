@@ -23,7 +23,7 @@ program binom
   
   call statTools_init()  ! Initialise statTools and libSUFR
   
-  if(command_argument_count().ne.3) call syntax_quit('binom n k p', 0, 'Compute the probability of k succesful trials out of n '// &
+  if(command_argument_count().ne.3) call syntax_quit('n k p', 0, 'Compute the probability of k succesful trials out of n '// &
        'trials with probability p:  n! / [k!(n-k)!] * p^k * (1-p)^(n-k)')
   
   call get_command_argument_i(1,n)

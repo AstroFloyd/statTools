@@ -29,7 +29,7 @@ program statistics
   call statTools_init()  ! Initialise statTools and libSUFR
   
   nArg = command_argument_count()
-  if(Narg.lt.1)  call syntax_quit('<x_1> <x_2> ... <x_n>', 0, 'Calculate basic statistics for a number of data points')
+  if(Narg.lt.2)  call syntax_quit('<x_1> <x_2> [<x_3> ... <x_n>]', 0, 'Calculate basic statistics for a number of data points')
   
   n = nArg
   allocate(dat(n))

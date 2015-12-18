@@ -23,17 +23,17 @@ code documentation, or to contact the developer, see:
 .SS "Commands"
 .br
 
-.RI "\fBst_binom\fP  Calculate binominal statistics:  \fIP = n! / [k!(n-k)!] * p^k * (1-p)^(n-k)\fP for \fIk\fP succesful trials out of \fIn\fP trials with probability \fIp\fP"
+.RI "\fBst_binom\fP  \fI<n> <k> <p>\fP  Calculate binominal statistics:  \fIP = n! / [k!(n-k)!] * p^k * (1-p)^(n-k)\fP for \fIk\fP succesful trials out of \fIn\fP trials with probability \fIp\fP"
 
-.RI "\fBst_die\fP  Throw an \fIn\fP-sided die (several times)"
+.RI "\fBst_die\fP  \fI<n> <m>\fP  Throw an \fIn\fP-sided die \fIm\fP times"
 
-.RI "\fBst_error_propagation\fP  Compute the error when adding, subtracting, multiplying or dividing two quantities with symmetric errors"
+.RI "\fBst_error_propagation\fP  \fI<x> <dx>  <y> <dy>\fP  Compute the error when adding, subtracting, multiplying or dividing two quantities with symmetric errors"
 
-.RI "\fBst_lintpol\fP  Do linear inter- or extrapolation using two datapoints"
+.RI "\fBst_lintpol\fP  \fI<x1> <x2>  <y1> <y2>  <x>\fP  Do linear inter- or extrapolation using two datapoints"
 
-.RI "\fBst_poisson\fP  Calculate Poisson statistics:  \fIP = L^k e^-L / k!\fP"
+.RI "\fBst_poisson\fP  \fI<k> <L>\fP  Calculate Poisson statistics:  \fIP = L^k e^-L / k!\fP"
 
-.RI "\fBst_statistics\fP  Calculate basic statistics (mean, median, variance, standard deviation, etc.) for a number of data points"
+.RI "\fBst_statistics\fP  \fI<x_1> <x_2> [... <x_n>]\fP  Calculate basic statistics (mean, median, variance, standard deviation, etc.) for a number of data points"
 
 
 
