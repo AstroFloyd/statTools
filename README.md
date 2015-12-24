@@ -11,7 +11,7 @@ with [gfortran](https://gcc.gnu.org/fortran/) (4.9 or newer),
 [g95](http://www.g95.org) and
 [Intel Fortran](http://software.intel.com/en-us/articles/non-commercial-software-development/)
 and can be used under the conditions of version 3 of the
-[GPL](http://www.gnu.org/licenses/gpl.html). Stattools is developed by
+[GPL](http://www.gnu.org/licenses/gpl.html). StatTools is developed by
 [AstroFloyd](http://astrofloyd.org/).
 
 
