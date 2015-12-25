@@ -7,19 +7,21 @@
 !***********************************************************************************************************************************
 program asymmetric_errors
   use SUFR_kinds, only: double
-  use SUFR_constants, only: set_SUFR_constants
+  use SUFR_system, only: syntax_quit
   use SUFR_numerics, only: deq0
+  use SUFR_text, only: d2s
   use SUFR_interpolate, only: linear_interpolation
   use SUFR_command_line, only: get_command_argument_d
+  use ST_general, only: statTools_init
   
   implicit none
   integer, parameter :: pln=2*500  ! MUST be even!!! 200: 0.2s (min: 0.08s), error: sigma: 3.2e-4;  500: 1.6s, error: sigma: 5e-5
   integer :: iy, jx,jy, verbosity
   real(double) :: xx1(pln),Px1(pln), xx2(pln),Px2(pln),  xmin,xmax,dx,xmin1,xmax1, yy(pln),fy(pln), myFunction
-  real(double) :: yCumul(pln), cumul1,cumul2, bnd1,bnd2, median,mode,dfyMin,dfyMax, x1,dx1Pl,dx1Mn, x2,dx2Pl,dx2Mn
+  real(double) :: yCumul(pln), cumul1,cumul2, bnd1,bnd2, median,mode,dfyMin,dfyMax, x1,dx1Pl,dx1Mn, x2,dx2Pl,dx2Mn, accur
   character :: oper
   
-  call set_SUFR_constants()
+  call statTools_init()  ! Initialise statTools and libSUFR
   verbosity = 0  ! 1: add some extra output
   
   select case(command_argument_count())
@@ -48,19 +50,18 @@ program asymmetric_errors
      call get_command_argument_d(6,dx2Mn)  ! - dx2Mn
      
      call get_command_argument(7,oper)    ! operation: '+', '-'
+     
   case default
-     write(*,'(/,A)') '  This program does simple error propagation for asymmetric errors, e.g. '// &
-          '(x1 + dx1 - dx1) + (x2 + dx2 - dx2)'
-     write(*,'(A,/)') '  Syntax:  asymmetric_errors  <x1> <+dx1> <-dx1>  <x2> <+dx2> <-dx2> <operator (+ or -)>'
-     stop
+     call syntax_quit('<x1> <+dx1> <-dx1>  <x2> <+dx2> <-dx2> <operator (+ or -)>', 0, &
+          'Approximate error propagation for asymmetric errors, e.g. (x1 + dx1 - dx1) + (x2 + dx2 - dx2)')
   end select
   
   
   median=0.d0; dfyMin=0.d0; dfyMax=0.d0
   
   
-  write(*,'(/,9(A,F14.5))') '  Computing:  ', x1, '    +', dx1Pl, '    -', dx1Mn, '       '//oper//'     ', &
-       x2, '    +', dx2Pl, '    -', dx2Mn
+  write(*,'(/,9(A,A))') '  Computing:   ', d2s(x1,5), '  +  ', d2s(dx1Pl,5), '  -  ', d2s(dx1Mn,5), '    '//oper//'    ', &
+       d2s(x2,5), '  +  ', d2s(dx2Pl,5), '  -  ', d2s(dx2Mn,5)
 
   
   ! Define functions:
@@ -114,9 +115,10 @@ program asymmetric_errors
      end if
   end do
   
-  write(*,'(/,A,F9.5)') '  Cumul:', yCumul(pln)
+  accur = 1.d0 - sqrt((2.d0-yCumul(pln))/2.d0)      ! Estimate the accuracy
+  write(*,'(/,A,F9.5,A)') '  Accuracy:  ', accur, '  (1.0 is perfect)'
   if(abs(yCumul(pln)-2.d0).gt.0.001d0) then
-     write(*,'(////,A)') '  ***  WARNING:  cumul != 2: your results may not be correct!  ***'
+     write(*,'(////,A)') '  ***  WARNING:  the accuracy is very poor: your results may not be correct!  ***'
      write(*,'(A,//)') '       Press  ENTER  to continue...'
      read(*,*)
   end if
@@ -171,9 +173,9 @@ program asymmetric_errors
   write(*,'(A,F14.5)')    '  Median:  ', median
   write(*,'(A,F14.5)')    '  Mode:    ', mode
   write(*,*)
-  write(*,'(2(A,F14.5))') '  Range:       ', dfyMax, '  -- ', dfyMin
-  write(*,'(2(A,F14.5))') '  Symmetric:   ', (dfyMin+dfyMax)/2.d0, '  +- ', abs(dfyMin-dfyMax)/2.d0
-  write(*,'(3(A,F14.5))') '  Asymmetric:  ', median, '   + ', abs(median-dfyMin), '   - ', abs(median-dfyMax)
+  write(*,'(3(A,A))') '  Asymmetric:  ', d2s(median,5), '   +  ', d2s(abs(median-dfyMin),5), '   -  ', d2s(abs(median-dfyMax),5)
+  write(*,'(2(A,A))') '  Symmetric:   ', d2s((dfyMin+dfyMax)/2.d0,5), '  +-  ', d2s(abs(dfyMin-dfyMax)/2.d0,5)
+  write(*,'(2(A,A))') '  Range:       ', d2s(dfyMax,5), '  --  ', d2s(dfyMin,5)
   write(*,*)
   
 end program asymmetric_errors
