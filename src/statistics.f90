@@ -16,6 +16,7 @@ program statistics
   use SUFR_kinds, only: double
   use SUFR_system, only: syntax_quit
   use SUFR_statistics, only: median, stdev
+  use SUFR_text, only: d2s
   use ST_general, only: statTools_init
   
   implicit none
@@ -89,7 +90,7 @@ program statistics
   
   write(*,*)
   if(abs(mean_om).le.3 .and. abs(stdev_om).le.3) then
-     write(*,'(2(A,F0.3))')     '  mean +- stdev:     ', mean, ' +- ', myStDev
+     write(*,'(A)')     '  mean +- stdev:     '//d2s(mean,3)//' +- '//d2s(myStDev,3)
   else
      write(fmt,'(A,I3.3,A,I3.3,A,I3.3,A)') '(A,I',abs(mean_om-stdev_om)+1,', A,I',extra_digits+1,',A,I',nexp+1,')'
      write(*,trim(fmt))     '  mean +- stdev:     ', nint(mean_fmt), ' +- ', nint(stdev_fmt), ' x 10^',stdev_om
