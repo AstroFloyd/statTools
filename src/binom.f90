@@ -17,7 +17,7 @@ program binom
   use ST_general, only: statTools_init
   
   implicit none
-  real(double) :: p, bin, binsum,binminsum,  mean,var,stdev
+  real(double) :: p, bin, binCumul,binminCumul,  mean,var,stdev
   integer :: n,k,i
   
   
@@ -30,20 +30,15 @@ program binom
   call get_command_argument_i(2,k)
   call get_command_argument_d(3,p)
   
-  binsum = 0.d0
-  binminsum = 0.d0
+  binCumul = 0.d0
+  binminCumul = 0.d0
   bin = binom_prob(n,k,p)
-  if(k.eq.0) then
-     binsum = bin
-     binminsum = 1.d0 - bin
-  else
-     do i=1,k
-        binsum = binsum + binom_prob(n,i,p)
-     end do
-     do i=k,n
-        binminsum = binminsum + binom_prob(n,i,p)
-     end do
-  end if
+  do i=0,k
+     binCumul = binCumul + binom_prob(n,i,p)
+  end do
+  do i=k,n
+     binminCumul = binminCumul + binom_prob(n,i,p)
+  end do
   
   mean = n*p
   var = n*p*(1.d0-p)
@@ -56,10 +51,12 @@ program binom
   
   write(*,*)
   write(*,'(A,F15.6,ES15.6, A,ES13.6)') '  binom:         ',bin,bin, ',   1 :',1.d0/bin
-  write(*,'(A,F15.6,ES15.6, A,ES13.6)') '  binom_sum:     ',binsum,binsum, ',   1 :',1.d0/binsum
-  write(*,'(A,F15.6,ES15.6, A,ES13.6)') '  1 - binom_sum: ',binminsum,binminsum, ',   1 :',1.d0/binminsum
+  write(*,'(A,F15.6,ES15.6, A,ES13.6, A,I0,A)') '  binom cumul:     ',binCumul,binCumul, ',   1 :',1.d0/binCumul, &
+       '  (',k,' or fewer)'
+  write(*,'(A,F15.6,ES15.6, A,ES13.6, A,I0,A)') '  1 - binom cumul: ',binminCumul,binminCumul, ',   1 :',1.d0/binminCumul, &
+       '  (',k,' or more)'
   
-  !write(*,'(A,F15.6,ES15.6)')'  1 - binom_sum: ',1.d0-binsum,1.d0-binsum  ! Not accurate because of round off
+  !write(*,'(A,F15.6,ES15.6)')'  1 - binom_Cumul: ',1.d0-binCumul,1.d0-binCumul  ! Not accurate because of round off
   
   write(*,*)
   write(*,'(A,F15.6,ES15.6)') '  mean:          ',mean,mean
