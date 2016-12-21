@@ -84,7 +84,7 @@ target_link_libraries( St  ${LibSUFR_LIBRARIES} )                    # link libS
 
 # List of programs to compile:
 set( ST_PROGRAMS
-  asymmetric_errors binom dice die error_propagation lintpol poisson statistics
+  asymmetric_errors binom dice die error_propagation gauss lintpol poisson statistics
   )
 
 
