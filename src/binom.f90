@@ -45,12 +45,12 @@ program binom
   stdev = sqrt(var)
   
   write(*,*)
-  write(*,'(A,I15)')            '  n:             ',n
-  write(*,'(A,I15)')            '  k:             ',k
-  write(*,'(A,F15.6,ES15.6)')   '  p:             ',p,p
+  write(*,'(A,I15)')                            '  n:               ',n
+  write(*,'(A,I15)')                            '  k:               ',k
+  write(*,'(A,F15.6,ES15.6)')                   '  p:               ',p,p
   
   write(*,*)
-  write(*,'(A,F15.6,ES15.6, A,ES13.6)') '  binom:         ',bin,bin, ',   1 :',1.d0/bin
+  write(*,'(A,F15.6,ES15.6, A,ES13.6)')         '  binom:           ',bin,bin, ',   1 :',1.d0/bin
   write(*,'(A,F15.6,ES15.6, A,ES13.6, A,I0,A)') '  binom cumul:     ',binCumul,binCumul, ',   1 :',1.d0/binCumul, &
        '  (',k,' or fewer)'
   write(*,'(A,F15.6,ES15.6, A,ES13.6, A,I0,A)') '  1 - binom cumul: ',binminCumul,binminCumul, ',   1 :',1.d0/binminCumul, &
@@ -59,9 +59,9 @@ program binom
   !write(*,'(A,F15.6,ES15.6)')'  1 - binom_Cumul: ',1.d0-binCumul,1.d0-binCumul  ! Not accurate because of round off
   
   write(*,*)
-  write(*,'(A,F15.6,ES15.6)') '  mean:          ',mean,mean
-  write(*,'(A,F15.6,ES15.6)') '  variance:      ',var,var
-  write(*,'(A,F15.6,ES15.6)') '  stdev:         ',stdev,stdev
+  write(*,'(A,F15.6,ES15.6)')                   '  mean:            ',mean,mean
+  write(*,'(A,F15.6,ES15.6)')                   '  variance:        ',var,var
+  write(*,'(A,F15.6,ES15.6)')                   '  stdev:           ',stdev,stdev
   write(*,*)
   
 end program binom

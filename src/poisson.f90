@@ -13,7 +13,7 @@ program poisson
   use ST_general, only: statTools_init
   
   implicit none
-  real(double) :: lambda, pois, poissum,poisminsum,  mean,var,stdev, pp
+  real(double) :: lambda, pois, poisCumul,poisminCumul,  mean,var,stdev, pp
   integer :: k,i
   
   
@@ -25,39 +25,36 @@ program poisson
   call get_command_argument_i(1, k)
   call get_command_argument_d(2, lambda)
   
-  poissum = 0.d0
-  poisminsum = 0.d0
+  poisCumul = 0.d0
+  poisminCumul = 0.d0
   pois = poisson_prob(k, lambda)
-  if(k.eq.0) then
-     poissum = pois
-     poisminsum = 1.d0 - pois
-  else
-     do i=1,k
-        poissum = poissum + poisson_prob(i, lambda)
-     end do
-     do i=k,huge(k)
-        pp = poisson_prob(i, lambda)
-        poisminsum = poisminsum + pp
-        if(pp.lt.1.d-7) exit  ! Quoted accuracy: 10^-6
-     end do
-  end if
+  do i=0,k
+     poisCumul = poisCumul + poisson_prob(i, lambda)
+  end do
+  do i=k,huge(k)
+     pp = poisson_prob(i, lambda)
+     poisminCumul = poisminCumul + pp
+     if(pp.lt.1.d-7) exit  ! Quoted accuracy: 10^-6
+  end do
   
   mean  = lambda
   var   = lambda
   stdev = sqrt(var)
   
   write(*,*)
-  write(*,'(A,I15)')                    '  k:              ',k
-  write(*,'(A,F15.6,ES15.6)')           '  λ:              ',lambda,lambda
+  write(*,'(A,I15)')                            '  k:                ',k
+  write(*,'(A,F15.6,ES15.6)')                   '  λ:                ',lambda,lambda
   write(*,*)
-  write(*,'(A,F15.6,ES15.6, A,ES13.6)') '  poison:         ', pois,       pois,       ',   1 :', 1.d0/pois
-  write(*,'(A,F15.6,ES15.6, A,ES13.6)') '  poison_sum:     ', poissum,    poissum,    ',   1 :', 1.d0/poissum
-  write(*,'(A,F15.6,ES15.6, A,ES13.6)') '  1 - poison_sum: ', poisminsum, poisminsum, ',   1 :', 1.d0/poisminsum
+  write(*,'(A,F15.6,ES15.6, A,ES13.6)')         '  poison:           ', pois,       pois,       ',   1 :', 1.d0/pois
+  write(*,'(A,F15.6,ES15.6, A,ES13.6, A,I0,A)') '  poison cumul:     ', poisCumul,    poisCumul,    ',   1 :', 1.d0/poisCumul,    &
+       '  (',k,' or fewer)'
+  write(*,'(A,F15.6,ES15.6, A,ES13.6, A,I0,A)') '  1 - poison cumul: ', poisminCumul, poisminCumul, ',   1 :', 1.d0/poisminCumul, &
+       '  (',k,' or more)'
   
   write(*,*)
-  write(*,'(A,F15.6,ES15.6)')           '  mean:           ',mean,  mean
-  write(*,'(A,F15.6,ES15.6)')           '  variance:       ',var,   var
-  write(*,'(A,F15.6,ES15.6)')           '  stdev:          ',stdev, stdev
+  write(*,'(A,F15.6,ES15.6)')                   '  mean:             ',mean,  mean
+  write(*,'(A,F15.6,ES15.6)')                   '  variance:         ',var,   var
+  write(*,'(A,F15.6,ES15.6)')                   '  stdev:            ',stdev, stdev
   write(*,*)
   
 end program poisson
