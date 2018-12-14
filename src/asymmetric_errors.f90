@@ -18,7 +18,7 @@ program asymmetric_errors
   integer, parameter :: pln=2*500  ! MUST be even!!! 200: 0.2s (min: 0.08s), error: sigma: 3.2e-4;  500: 1.6s, error: sigma: 5e-5
   integer :: iy, jx,jy, verbosity
   real(double) :: xx1(pln),Px1(pln), xx2(pln),Px2(pln),  xmin,xmax,dx,xmin1,xmax1, yy(pln),fy(pln), myFunction
-  real(double) :: yCumul(pln), cumul1,cumul2, bnd1,bnd2, median,mode,dfyMin,dfyMax, x1,dx1Pl,dx1Mn, x2,dx2Pl,dx2Mn, accur
+  real(double) :: yCumul(0:pln), cumul1,cumul2, bnd1,bnd2, median,mode,dfyMin,dfyMax, x1,dx1Pl,dx1Mn, x2,dx2Pl,dx2Mn, accur
   character :: oper
   
   call statTools_init()  ! Initialise statTools and libSUFR

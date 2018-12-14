@@ -31,7 +31,7 @@ program poisson
   do i=0,k
      poisCumul = poisCumul + poisson_prob(i, lambda)
   end do
-  do i=k,huge(k)
+  do i=k,huge(k)-1
      pp = poisson_prob(i, lambda)
      poisminCumul = poisminCumul + pp
      if(pp.lt.1.d-7) exit  ! Quoted accuracy: 10^-6
