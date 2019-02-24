@@ -16,6 +16,7 @@ program statistics
   use SUFR_kinds, only: double
   use SUFR_system, only: syntax_quit
   use SUFR_statistics, only: median, stdev
+  use SUFR_numerics, only: dne0
   use SUFR_text, only: d2s
   use ST_general, only: statTools_init
   
@@ -58,11 +59,14 @@ program statistics
   
   
   extra_digits = 0   ! Print more than the default number of significant digits: default 0, try 1
-  mean_om = floor(log10(abs(mean)))
-  stdev_om = floor(log10(abs(myStDev))) - extra_digits
+  mean_om = 1
+  if(dne0(mean)) mean_om = floor(log10(abs(mean)))
+  stdev_om = 1
+  if(dne0(myStDev)) stdev_om = floor(log10(abs(myStDev))) - extra_digits
   
   ! Extra room for exponent if <0, <-9, >9, >99, ...
-  nexp = floor(log10(abs(dble(stdev_om))))
+  nexp = 0
+  if(stdev_om.gt.0.d0) nexp = floor(log10(abs(dble(stdev_om))))
   if(stdev_om.lt.0.d0) nexp = ceiling(log10(abs(dble(stdev_om))))
   
   
@@ -92,6 +96,7 @@ program statistics
   else
      mean_fmt = mean/10.d0**stdev_om
      stdev_fmt = myStDev/10.d0**stdev_om
+     !print*,mean_om, stdev_om, mean_om-stdev_om
      write(fmt,'(A,I3.3,A,I3.3,A,I3.3,A)') '(A,I',abs(mean_om-stdev_om)+1,', A,I',extra_digits+1,',A,I',nexp+1,')'
      
      write(*,trim(fmt))      '  mean +- stdev:       ', nint(mean_fmt), ' +- ', nint(stdev_fmt), ' x 10^',stdev_om
