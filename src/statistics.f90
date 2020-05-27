@@ -91,19 +91,20 @@ program statistics
   
   write(*,*)
   if(abs(mean_om).le.3 .and. abs(stdev_om).le.3) then
-     write(*,'(A)')          '  mean +- stdev:       '//d2s(mean,3)//' +- '//d2s(myStDev,3)
-     write(*,'(A)')          '  mean +- stdev range: '//d2s(mean-myStDev,3)//' - '//d2s(mean+myStDev,3)
+     write(*,'(A)')          '  mean +- stdev:          '//d2s(mean,3)//' +- '//d2s(myStDev,3)
+     write(*,'(A)')          '  mean +- stdev range:    '//d2s(mean-myStDev,3)//' - '//d2s(mean+myStDev,3)
   else
      mean_fmt = mean/10.d0**stdev_om
      stdev_fmt = myStDev/10.d0**stdev_om
      !print*,mean_om, stdev_om, mean_om-stdev_om
      write(fmt,'(A,I3.3,A,I3.3,A,I3.3,A)') '(A,I',abs(mean_om-stdev_om)+1,', A,I',extra_digits+1,',A,I',nexp+1,')'
      
-     write(*,trim(fmt))      '  mean +- stdev:       ', nint(mean_fmt), ' +- ', nint(stdev_fmt), ' x 10^',stdev_om
-     write(*,trim(fmt))      '  mean +- stdev range: ', nint(mean_fmt-stdev_fmt), ' - ', nint(mean_fmt+stdev_fmt), ' x 10^',stdev_om
+     write(*,trim(fmt))      '  mean +- stdev:          ', nint(mean_fmt), ' +- ', nint(stdev_fmt), ' x 10^',stdev_om
+     write(*,trim(fmt))      '  mean +- stdev range:    ', nint(mean_fmt-stdev_fmt), ' - ', nint(mean_fmt+stdev_fmt), &
+          ' x 10^',stdev_om
   end if
   
-  write(*,'(2(A,1p,G12.3))') '  min - max range:     ', minx, ' - ', maxx
+  write(*,'(2(A,1p,G12.3))') '  min - max range:        ', minx, ' - ', maxx
   
   write(*,*)
   

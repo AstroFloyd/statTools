@@ -45,7 +45,8 @@ program poisson
   write(*,'(A,I15)')                            '  k:                ',k
   write(*,'(A,F15.6,ES15.6)')                   '  λ:                ',lambda,lambda
   write(*,*)
-  write(*,'(A,F15.6,ES15.6, A,ES13.6)')         '  poison:           ', pois,       pois,       ',   1 :', 1.d0/pois
+  write(*,'(A,F15.6,ES15.6, A,ES13.6, A,I0,A)')         '  poison:           ', pois,       pois,       ',   1 :', 1.d0/pois,     &
+       '  (exactly ',k,')'
   write(*,'(A,F15.6,ES15.6, A,ES13.6, A,I0,A)') '  poison cumul:     ', poisCumul,    poisCumul,    ',   1 :', 1.d0/poisCumul,    &
        '  (',k,' or fewer)'
   write(*,'(A,F15.6,ES15.6, A,ES13.6, A,I0,A)') '  1 - poison cumul: ', poisminCumul, poisminCumul, ',   1 :', 1.d0/poisminCumul, &
