@@ -13,12 +13,12 @@ program binom
   use SUFR_kinds, only: double
   use SUFR_system, only: syntax_quit
   use SUFR_command_line, only: get_command_argument_i, get_command_argument_d
-  use SUFR_statistics, only: binom_prob
+  use SUFR_statistics, only: binom_prob, binom_cumul_prob
   use ST_general, only: statTools_init
   
   implicit none
   real(double) :: p, bin, binCumul,binminCumul,  mean,var,stdev
-  integer :: n,k,i
+  integer :: n,k
   
   
   call statTools_init()  ! Initialise statTools and libSUFR
@@ -30,15 +30,9 @@ program binom
   call get_command_argument_i(2,k)
   call get_command_argument_d(3,p)
   
-  binCumul = 0.d0
-  binminCumul = 0.d0
-  bin = binom_prob(n,k,p)
-  do i=0,k
-     binCumul = binCumul + binom_prob(n,i,p)
-  end do
-  do i=k,n
-     binminCumul = binminCumul + binom_prob(n,i,p)
-  end do
+  bin = binom_prob(n,k,p)               ! Binomial probability: EXACTLY k succesful trials
+  binCumul = binom_cumul_prob(n,k,p)    ! Cumulative probability: k OR FEWER succesful trials
+  binminCumul = 1.d0 - binCumul + bin   ! Cumulative probability: k OR MORE succesful trials
   
   mean = n*p
   var = n*p*(1.d0-p)
