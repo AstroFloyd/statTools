@@ -9,12 +9,12 @@ program poisson
   use SUFR_kinds, only: double
   use SUFR_system, only: syntax_quit
   use SUFR_command_line, only: get_command_argument_i, get_command_argument_d
-  use SUFR_statistics, only: poisson_prob
+  use SUFR_statistics, only: poisson_prob, poisson_prob_cumul
   use ST_general, only: statTools_init
   
   implicit none
-  real(double) :: lambda, pois, poisCumul,poisminCumul,  mean,var,stdev, pp
-  integer :: k,i
+  real(double) :: lambda, pois, poisCumul,poisminCumul,  mean,var,stdev
+  integer :: k
   
   
   call statTools_init()  ! Initialise statTools and libSUFR
@@ -25,17 +25,9 @@ program poisson
   call get_command_argument_i(1, k)
   call get_command_argument_d(2, lambda)
   
-  poisCumul = 0.d0
-  poisminCumul = 0.d0
   pois = poisson_prob(k, lambda)
-  do i=0,k
-     poisCumul = poisCumul + poisson_prob(i, lambda)
-  end do
-  do i=k,huge(k)-1
-     pp = poisson_prob(i, lambda)
-     poisminCumul = poisminCumul + pp
-     if(pp.lt.1.d-7) exit  ! Quoted accuracy: 10^-6
-  end do
+  poisCumul = poisson_prob_cumul(k, lambda)
+  poisminCumul = 1.d0 - poisCumul + pois
   
   mean  = lambda
   var   = lambda
